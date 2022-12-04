@@ -138,15 +138,28 @@
                 <h2 class="display-4 mb-2 text-dark">Mulai Deteksi</h2>
             </div>
 
-            <p>Device saat ini: <span id="dsi"></span></p>
-            <video id="webcamVideo" width="720" height="480" style="border: 1px black solid;" autoplay></video>
-            <canvas id="webcamCanvas" width="720" height="480" style="border: 1px black solid; display: none;"></canvas>
-            
-            <br>
-            
-            <button class="btn btn-primary" onclick="startCamera();">Mulai Kamera</button>  
-            <button class="btn btn-primary" onclick="ambilGambar();">Ambil Gambar</button>
-		
+            <div class="row text-center">
+                <div class="col-6">
+                    <div class="row mb-4">
+                        <div class="col-6">
+                            <a class="btn btn-primary rounded-pill py-1 px-3" onclick="showCamera()">Aktifkan Kamera</a>
+                        </div>
+                        <div class="col-6">
+                            <form>
+                                <input class="btn btn-primary rounded-pill py-1 px-3" type=button value="Ambil Foto" onClick="takeSnapshot()">
+                            </form>
+                        </div>
+                    </div>
+                    <div id="my_camera"></div>    
+                </div>
+                <div class="col-6">
+                    <div class="row mb-4">
+                        <div id="cam_results">
+                            <p class="text-primary">Hasil foto akan ditampilkan disini..</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
     <!-- Aplikasi End -->
@@ -204,6 +217,8 @@
     <!-- Template Javascript -->
     <script src="js/main.js"></script>
     <script src="js/webcam.js"></script>
+	<script type="text/javascript" src="js/webcam.min.js"></script>
+	
 </body>
 
 </html>
