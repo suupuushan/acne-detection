@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Skin Saviour</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="" name="keywords">
+    <meta content="" name="description">
+
+    <!-- Favicon -->
+    <link href="{{ url_for('static', filename='img/favicon.ico') }}" rel="icon">
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet"> 
+
+    <!-- Icon Font Stylesheet -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+
+    <!-- Libraries Stylesheet -->
+    <link rel="stylesheet" href={{ url_for('static', filename='/lib/animate/animate.min.css') }} type="text/css">
+    <link rel="stylesheet" href={{ url_for('static', filename='/lib/owlcarousel/assets/owl.carousel.min.css') }} type="text/css">
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link rel="stylesheet" href={{ url_for('static', filename='/css/bootstrap.min.css') }} type="text/css">
+
+    <!-- Template Stylesheet -->
+    <link rel="stylesheet" href={{ url_for('static', filename='/css/style.css') }}  type="text/css">
+</head>
+
+<body>
+    <!-- Spinner Start -->
+    <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+        <div class="spinner-grow text-primary" role="status"></div>
+    </div>
+    <!-- Spinner End -->
+
+    <!-- Navbar Start -->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top py-lg-0 px-lg-5 wow fadeIn" data-wow-delay="0.1s">
+        <a href="#" class="navbar-brand ms-4 ms-lg-0">
+            <img src="static/img/logo.png" alt="" width="100">
+        <button type="button" class="navbar-toggler me-4" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+            <div class="navbar-nav ms-auto p-4 p-lg-0">
+                <a href="{{ url_for('beranda') }}" class="nav-item nav-link active">Beranda</a>
+                <a href="#tentang" class="nav-item nav-link">Tentang</a>
+                <a href="{{ url_for('aplikasi') }}" class="nav-item nav-link">Aplikasi</a>
+                <a href="{{ url_for('team') }}" class="nav-item nav-link">Tim</a>
+            </div>
+            <div class=" d-none d-lg-flex">
+                <div class="ps-3">
+                    <small class="text-primary mb-0"></small>
+                    <p class="text-light fs-5 mb-0"></p>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <!-- Navbar End -->
+
+
+    <!-- Carousel Start -->
+    <div id="beranda" class="container-fluid p-0 pb-3 wow fadeIn" data-wow-delay="0.1s">
+        <div class="owl-carousel header-carousel position-relative">
+            <div class="owl-carousel-item position-relative">
+                <img class="img-fluid" src="static/img/background-2.png" alt="">
+                <div class="owl-carousel-inner">
+                    <div class="container">
+                        <div class="row justify-content-start">
+                            <div class="col-lg-8">
+                                <h2 class="display-1 text-dark mb-4 animated slideInDown">Kenali Penyakit Kulitmu</h2>
+                                <p class="text-dark fs-5 mb-4 pb-3">Mengabaikan penyakit kulit bisa berakibat fatal lho!<br>Yuk! kenali penyakit kulitmu dan dapatkan informasi cara pencegahan dan pengobatan yang benar.</p>
+                                <a href="aplikasi.html" class="btn btn-primary rounded-pill py-3 px-5">Deteksi penyakit kulitmu sekarang!</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="owl-carousel-item position-relative">
+                <img class="img-fluid" src="static/img/background-1.png" alt="">
+                <div class="owl-carousel-inner">
+                    <div class="container">
+                        <div class="row justify-content-start">
+                            <div class="col-lg-8">
+                                <h2 class="display-1 text-dark mb-4 animated slideInDown">Kenali Penyakit Kulitmu</h2>
+                                <p class="text-dark fs-5 mb-4 pb-3">Mengabaikan penyakit kulit bisa berakibat fatal lho!<br>Yuk! kenali penyakit kulitmu dan dapatkan informasi cara pencegahan dan pengobatan yang benar.</p>
+                                <a href="aplikasi.html" class="btn btn-primary rounded-pill py-3 px-5">Deteksi penyakit kulitmu sekarang!</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Carousel End -->
+
+    <!-- Tentang Start -->
+    <div id="tentang" class="container-xxl py-4">
+        <div class="container">
+            <div class="row g-5">
+                <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s">
+                    <div class="row img-twice position-relative h-100">
+                        <div class="col-6">
+                            <img class="img-fluid rounded" src="static/img/tentang-1.jpg" alt="">
+                        </div>
+                        <div class="col-6 align-self-end">
+                            <img class="img-fluid rounded" src="static/img/tentang-2.png" alt="">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.5s">
+                    <div class="h-100 text-justify">
+                        <p class="text-primary text-uppercase mb-2">// Tentang</p>
+                        <h2 class="display-6 mb-4 text-dark">Skin Saviour - Kenali Penyakit Kulitmu</h2>
+                        <div class="text-justify">
+                            <p>Dapatkan hasil deteksi penyakit kulit yang dipersonalisasi khusus untukmu, hanya dengan berfoto dari perangkatmu dengan Skin Saviour. Skin Saviour adalah aplikasi deteksi penyakit kulit berteknologi Artificial Intelligence yang mampu mendeteksi penyakit kulit secara online. Kamu dapat mendeteksi penyakit kulit secara dini, tanpa menyita waktu dan uangmu!
+                            <br>Cukup meluangkan 1 menit, kamu dapat bisa mendapatkan hasil deteksi dan informasi penangobatannya. Sangat praktis, bukan?</p>
+                            <p class="fs-6 text-primary">* Hasil pemindaian bukan diagnosis. Untuk mendapatkan diagnosis yang akurat dan rekomendasi pengobatan - konsultasikan dengan dokter Anda.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Tentang End -->
+
+     <!-- Macam Penyakit Start -->
+     <div class="container-xxl bg-light my-5 pt-0">
+        <div class="container py-5">
+            <div class="text-center mx-auto py-2 mb-4 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 700px;">
+                <h2 class="display-4 mb-2 text-dark">Jenis Penyakit Kulit Apa Yang Dapat Dideteksi?</h2>
+            </div>
+            <div class="row g-4">
+                <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+                    <div class="product-item d-flex flex-column bg-white rounded overflow-hidden h-100">
+                        <div class="text-center p-4">
+                            <div class="d-inline-block border border-primary rounded-pill px-3 mb-3">1</div>
+                            <h4 class="mb-3">Eczema</h4>
+                            <span>gangguan pembengkakan pada kulit yang biasa terjadi pada anak usia dini</span>
+                        </div>
+                        <div class="position-relative mt-auto">
+                            <img class="img-fluid" src="static/img/eczema.jpg" alt="">
+                            <div class="product-overlay">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
+                    <div class="product-item d-flex flex-column bg-white rounded overflow-hidden h-100">
+                        <div class="text-center p-4">
+                            <div class="d-inline-block border border-primary rounded-pill pt-1 px-3 mb-3">2</div>
+                            <h4 class="mb-3">Basal Cell Carcinoma</h4>
+                            <span>salah satu jenis kanker kulit dengan bentuk paling umum</span>
+                        </div>
+                        <div class="position-relative mt-auto">
+                            <img class="img-fluid" src="static/img/basal cell carcinoma.jpg" alt="">
+                            <div class="product-overlay">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
+                    <div class="product-item d-flex flex-column bg-white rounded overflow-hidden h-100">
+                        <div class="text-center p-4">
+                            <div class="d-inline-block border border-primary rounded-pill pt-1 px-3 mb-3">3</div>
+                            <h4 class="mb-3">Melanocytic Nevi</h4>
+                            <span>juga disebut tahi lalat yang bisa memicu penyakit kanker kulit</span>
+                        </div>
+                        <div class="position-relative mt-auto">
+                            <img class="img-fluid" src="static/img/Melanocytic naevus.jpg" alt="">
+                            <div class="product-overlay">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Macam Penyakit End -->
+
+    <!-- Layanan Start -->
+     <div class="container-xxl">
+        <div class="container py-5">
+            <div class="text-center mx-auto py-2 mb-4 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 1000px;">
+                <h2 class="display-6 mb-2 text-dark">Mengapa Skin Saviour Layak Digunakan?</h2>
+            </div>
+            <div class="row g-4">
+                <div class="col-lg-4 col-md-6 wow fadeIn" data-wow-delay="0.1s">
+                    <div class="fact-item bg-light rounded text-center h-100 p-5">
+                        <i class="fa fa-tablet fa-2x text-primary mb-4"></i>
+                        <h4 class="mb-3">Aksesibilitas</h4>
+                        <p class="mb-0">Skin Saviour dapat mendeteksi jenis penyakit kulit yang beragam, kapan saja dan di mana pun kamu berada.</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 wow fadeIn" data-wow-delay="0.3s">
+                    <div class="fact-item bg-light rounded text-center h-100 p-5">
+                        <i class="fa fa-microchip fa-2x text-primary mb-4"></i>
+                        <h4 class="mb-3">Teknologi AI</h4>
+                        <p class="mb-0">Skin Saviour dibuat menggunakan konsep Artificial Intelligence sebagai hasil kerja sama antara spesialis IT dan calon dokter.</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 wow fadeIn" data-wow-delay="0.5s">
+                    <div class="fact-item bg-light rounded text-center h-100 p-5">
+                        <i class="fa fa-clock fa-2x text-primary mb-4"></i>
+                        <h4 class="mb-3">Sederhana</h4>
+                        <p class="mb-0">Cukup dengan mengambil foto kondisi kulitmu, dalam 1 menit kamu akan mengetahui hasilnya.</p>
+                    </div>
+                </div>
+            </div>
+            </div>
+        </div>
+    </div>
+    <!-- Layanan End -->
+
+    <div class="container my-6 pt-0">
+        <div class="container py-1 position-relative">
+            <img src="static/img/aplikasi-modified.png" width="100%">
+            <div class="aplikasi-box">
+                <h3 class="text-dark">Jangan sia-siakan kesempatanmu!</h3>
+                <p>Ketahui penyakit kulitmu sekarang!</p>
+                <a href="aplikasi.html" class="btn btn-primary rounded-pill py-3 px-5">Mulai disini</a>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Footer Start -->
+    <div class="container-fluid text-dark footer my-6 mb-0 py-5 wow fadeIn" data-wow-delay="0.1s">
+        <div class="container">
+            <div class="row g-5">
+                <div class="col-lg-4 col-md-6">
+                    <h4 class="text-dark mb-4">Skin Saviour</h4>
+                    <p>Skin Savior tidak dimaksudkan untuk melakukan diagnosis, melainkan untuk memberi pengguna kemampuan untuk mendeteksi penyakit kulit mereka secara dini.</p>
+                    <div class="row">
+                        <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
+                            &copy; <a href="#">Rangers UA</a><br>All Right Reserved.<br>2022
+                        </div> 
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <h4 class="text-dark mb-4">Navigasi</h4>
+                    <a class="btn btn-link" href="{{ url_for('beranda') }}">Beranda</a>
+                    <a class="btn btn-link" href="#tentang">Tentang</a>
+                    <a class="btn btn-link" href="{{ url_for('aplikasi') }}">Aplikasi</a>
+                    <a class="btn btn-link" href="{{ url_for('team') }}">Tim</a>
+                </div>
+                <div class="col-lg-5 col-md-6">
+                    <h4 class="text-dark mb-4">Hubungi Kami</h4>
+                    <p>Pertanyaan lebih lanjut mengenai Skin Saviour - hubungi kami melalui email:</p>
+                    <p class="text-primary"><b>rangersua@unand.ac.id</b></p><span>atau melalui sosial media:</span>
+                    <div class="d-flex pt-2">
+                        <a class="btn btn-square btn-outline-light rounded-circle me-1" href=""><i class="fab fa-twitter"></i></a>
+                        <a class="btn btn-square btn-outline-light rounded-circle me-1" href=""><i class="fab fa-facebook-f"></i></a>
+                        <a class="btn btn-square btn-outline-light rounded-circle me-1" href=""><i class="fab fa-youtube"></i></a>
+                        <a class="btn btn-square btn-outline-light rounded-circle me-0" href=""><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Footer End -->
+
+    <!-- Back to Top -->
+    <a href="#" class="btn btn-lg btn-primary btn-lg-square rounded-circle back-to-top"><i class="bi bi-arrow-up"></i></a>
+
+    <!-- JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src={{ url_for('static', filename='/lib/wow/wow.min.js') }}></script>
+    <script src={{ url_for('static', filename='/lib/easing/easing.min.js') }}></script>
+    <script src={{ url_for('static', filename='/lib/waypoints/waypoints.min.js') }}></script>
+    <script src={{ url_for('static', filename='/lib/counterup/counterup.min.js') }}></script>
+    <script src={{ url_for('static', filename='/lib/owlcarousel/owl.carousel.min.js') }}></script>
+
+    <!-- Template Javascript -->
+    <script src={{ url_for('static', filename='/js/main.js') }}></script>
+</body>
+
+</html>
