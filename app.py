@@ -1,10 +1,11 @@
 # LIBRARY #
-from flask import Flask, render_template, Response, request
+from flask import Flask, render_template, Response, request, jsonify
 import cv2
 import datetime
-import os
+import os 
 import numpy as np
 from PIL import Image
+from tensorflow import keras
 
 # VARIABLE GLOBAL #
 global capture, switch, filename
@@ -38,7 +39,7 @@ def gen_frames():
             if(capture):
                 capture=0
                 now = datetime.datetime.now()
-                filename = os.path.sep.join(['uploads', "upload_{}.jpg".format(str(now).replace(":",''))])
+                filename = os.path.sep.join(['uploads', "test gambar.jpg"])
                 cv2.imwrite(filename, frame)     
             try:
                 ret, buffer = cv2.imencode('.jpg', cv2.flip(frame,1))
@@ -51,33 +52,34 @@ def gen_frames():
         else:
             pass
 
-# # prediksi penyakit kulit
-# def predict():
-#     if filename != '':
-#         file_ext = os.path.splitext(filename)[1]
-#         gambar_prediksi = 'uploads/' + filename
+# prediksi penyakit kulit
+def predict():
+    gambar_prediksi = 'uploads/' + "test gambar.jpg"
 
-#         # open gambar prediksi
-#         test_image = Image.open('.' + gambar_prediksi)
+    # open gambar prediksi
+    test_image = Image.open(gambar_prediksi)
+    
+    # ubah ukuran gambar
+    test_image_resized = test_image.resize((400, 400))
+    
+    # konversi gambar ke array
+    image_array = np.array(test_image_resized)
+    test_image_x = (image_array / 255) - 0.5
+    test_image_x = np.array([image_array])
+
+    # prediksi gambar
+    y_pred_test_single = model.predict(test_image_x)
+    y_pred_test_classes_single = np.argmax(y_pred_test_single, axis=1)
+    
+    hasil_prediksi = name_classes[y_pred_test_classes_single[0]]
+
+    # Return hasil prediksi dengan format JSON
+    # return jsonify({
+    #     "prediksi": hasil_prediksi,
+    #     "gambar_prediksi": gambar_prediksi
+    # })
+    return 'Hai'
 		
-#         # ubah ukuran gambar
-#         test_image_resized = test_image.resize((32, 32))
-		
-#         # konversi gambar ke array
-#         image_array = np.array(test_image_resized)
-#         test_image_x = (image_array / 255) - 0.5
-#         test_image_x = np.array([image_array])
-
-#         # prediksi gambar
-#         y_pred_test_single = model.predict_proba(test_image_x)
-#         y_pred_test_classes_single = np.argmax(y_pred_test_single, axis=1)
-		
-#         hasil_prediksi = name_classes[y_pred_test_classes_single[0]]
-
-#     return 'Hai'
-
-
-  
 # ROUTING #
 @app.route('/')
 def beranda():
@@ -102,6 +104,8 @@ def tasks():
         if request.form.get('click') == 'Ambil & Prediksi Foto':
             global capture
             capture=1
+            predict()
+
         elif  request.form.get('stop') == 'Stop/Start Kamera':
             if(switch==1):
                 switch=0
@@ -116,7 +120,11 @@ def tasks():
     return render_template('aplikasi.html')
 
 if __name__ == '__main__':
-    app.run()
-    
+    # Load model yang telah ditraining
+    model = keras.models.load_model('mymodel')
+
+	# Run Flask di localhost 
+    app.run(host="localhost", port=5000, debug=True)
+
 camera.release()
 cv2.destroyAllWindows()     
