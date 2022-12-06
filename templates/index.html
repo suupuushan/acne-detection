@@ -9,7 +9,7 @@
     <meta content="" name="description">
 
     <!-- Favicon -->
-    <link href="img/favicon.ico" rel="icon">
+    <link href="{{ url_for('static', filename='img/favicon.ico') }}" rel="icon">
 
     <!-- Google Web Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -21,14 +21,14 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
 
     <!-- Libraries Stylesheet -->
-    <link href="lib/animate/animate.min.css" rel="stylesheet">
-    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='/lib/animate/animate.min.css') }}" type="text/css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='/lib/owlcarousel/assets/owl.carousel.min.css') }}" type="text/css">
 
     <!-- Customized Bootstrap Stylesheet -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='/css/bootstrap.min.css') }}" type="text/css">
 
     <!-- Template Stylesheet -->
-    <link href="css/style.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='/css/style.css') }}"  type="text/css">
 </head>
 
 <body>
@@ -41,16 +41,16 @@
     <!-- Navbar Start -->
     <nav class="navbar navbar-expand-lg navbar-light fixed-top py-lg-0 px-lg-5 wow fadeIn" data-wow-delay="0.1s">
         <a href="#" class="navbar-brand ms-4 ms-lg-0">
-            <img src="img/logo.png" alt="" width="100">
+            <img src="../static/img/logo.png" alt="" width="100">
         <button type="button" class="navbar-toggler me-4" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarCollapse">
             <div class="navbar-nav ms-auto p-4 p-lg-0">
-                <a href="index.html" class="nav-item nav-link active">Beranda</a>
-                <a href="#tentang" class="nav-item nav-link">Tentang</a>
-                <a href="aplikasi.html" class="nav-item nav-link">Aplikasi</a>
-                <a href="team.html" class="nav-item nav-link">Tim</a>
+                <a href="{{ url_for('beranda') }}" class="nav-item nav-link active">Beranda</a>
+                <a href="{{ url_for('beranda') }}" class="nav-item nav-link">Tentang</a>
+                <a href="{{ url_for('aplikasi') }}" class="nav-item nav-link">Aplikasi</a>
+                <a href="{{ url_for('tim') }}" class="nav-item nav-link">Tim</a>
             </div>
             <div class=" d-none d-lg-flex">
                 <div class="ps-3">
@@ -67,28 +67,28 @@
     <div id="beranda" class="container-fluid p-0 pb-3 wow fadeIn" data-wow-delay="0.1s">
         <div class="owl-carousel header-carousel position-relative">
             <div class="owl-carousel-item position-relative">
-                <img class="img-fluid" src="img/background-2.png" alt="">
+                <img class="img-fluid" src="../static/img/background-1.png" alt="">
                 <div class="owl-carousel-inner">
                     <div class="container">
                         <div class="row justify-content-start">
                             <div class="col-lg-8">
                                 <h2 class="display-1 text-dark mb-4 animated slideInDown">Kenali Penyakit Kulitmu</h2>
                                 <p class="text-dark fs-5 mb-4 pb-3">Mengabaikan penyakit kulit bisa berakibat fatal lho!<br>Yuk! kenali penyakit kulitmu dan dapatkan informasi cara pencegahan dan pengobatan yang benar.</p>
-                                <a href="aplikasi.html" class="btn btn-primary rounded-pill py-3 px-5">Deteksi penyakit kulitmu sekarang!</a>
+                                <a href="{{ url_for('aplikasi') }}" class="btn btn-primary rounded-pill py-3 px-5">Deteksi penyakit kulitmu sekarang!</a>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="owl-carousel-item position-relative">
-                <img class="img-fluid" src="img/background-1.png" alt="">
+                <img class="img-fluid" src="../static/img/background-2.png" alt="">
                 <div class="owl-carousel-inner">
                     <div class="container">
                         <div class="row justify-content-start">
                             <div class="col-lg-8">
                                 <h2 class="display-1 text-dark mb-4 animated slideInDown">Kenali Penyakit Kulitmu</h2>
                                 <p class="text-dark fs-5 mb-4 pb-3">Mengabaikan penyakit kulit bisa berakibat fatal lho!<br>Yuk! kenali penyakit kulitmu dan dapatkan informasi cara pencegahan dan pengobatan yang benar.</p>
-                                <a href="aplikasi.html" class="btn btn-primary rounded-pill py-3 px-5">Deteksi penyakit kulitmu sekarang!</a>
+                                <a href="{{ url_for('aplikasi') }}" class="btn btn-primary rounded-pill py-3 px-5">Deteksi penyakit kulitmu sekarang!</a>
                             </div>
                         </div>
                     </div>
@@ -105,10 +105,10 @@
                 <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s">
                     <div class="row img-twice position-relative h-100">
                         <div class="col-6">
-                            <img class="img-fluid rounded" src="img/tentang-1.jpg" alt="">
+                            <img class="img-fluid rounded" src="../static/img/tentang-1.jpg" alt="">
                         </div>
                         <div class="col-6 align-self-end">
-                            <img class="img-fluid rounded" src="img/tentang-2.png" alt="">
+                            <img class="img-fluid rounded" src="../static/img/tentang-2.png" alt="">
                         </div>
                     </div>
                 </div>
@@ -143,7 +143,7 @@
                             <span>gangguan pembengkakan pada kulit yang biasa terjadi pada anak usia dini</span>
                         </div>
                         <div class="position-relative mt-auto">
-                            <img class="img-fluid" src="img/eczema.jpg" alt="">
+                            <img class="img-fluid" src="../static/img/eczema.jpg" alt="">
                             <div class="product-overlay">
                             </div>
                         </div>
@@ -157,7 +157,7 @@
                             <span>salah satu jenis kanker kulit dengan bentuk paling umum</span>
                         </div>
                         <div class="position-relative mt-auto">
-                            <img class="img-fluid" src="img/basal cell carcinoma.jpg" alt="">
+                            <img class="img-fluid" src="../static/img/basal cell carcinoma.jpg" alt="">
                             <div class="product-overlay">
                             </div>
                         </div>
@@ -171,7 +171,7 @@
                             <span>juga disebut tahi lalat yang bisa memicu penyakit kanker kulit</span>
                         </div>
                         <div class="position-relative mt-auto">
-                            <img class="img-fluid" src="img/Melanocytic naevus.jpg" alt="">
+                            <img class="img-fluid" src="../static/img/Melanocytic naevus.jpg" alt="">
                             <div class="product-overlay">
                             </div>
                         </div>
@@ -218,11 +218,11 @@
 
     <div class="container my-6 pt-0">
         <div class="container py-1 position-relative">
-            <img src="img/aplikasi-modified.png" width="100%">
+            <img src="../static/img/aplikasi-modified.png" width="100%">
             <div class="aplikasi-box">
                 <h3 class="text-dark">Jangan sia-siakan kesempatanmu!</h3>
                 <p>Ketahui penyakit kulitmu sekarang!</p>
-                <a href="aplikasi.html" class="btn btn-primary rounded-pill py-3 px-5">Mulai disini</a>
+                <a href="{{ url_for('aplikasi') }}" class="btn btn-primary rounded-pill py-3 px-5">Mulai disini</a>
             </div>
         </div>
     </div>
@@ -243,22 +243,21 @@
                 </div>
                 <div class="col-lg-3 col-md-6">
                     <h4 class="text-dark mb-4">Navigasi</h4>
-                    <a class="btn btn-link" href="index.html">Beranda</a>
-                    <a class="btn btn-link" href="index.html">Tentang</a>
-                    <a class="btn btn-link" href="aplikasi.html">Aplikasi</a>
-                    <a class="btn btn-link" href="tim.html">Tim</a>
+                    <a class="btn btn-link" href="{{ url_for('beranda') }}">Beranda</a>
+                    <a class="btn btn-link" href="{{ url_for('beranda') }}">Tentang</a>
+                    <a class="btn btn-link" href="{{ url_for('aplikasi') }}">Aplikasi</a>
+                    <a class="btn btn-link" href="{{ url_for('tim') }}">Tim</a>
                 </div>
                 <div class="col-lg-5 col-md-6">
                     <h4 class="text-dark mb-4">Hubungi Kami</h4>
                     <p>Pertanyaan lebih lanjut mengenai Skin Saviour - hubungi kami melalui email:</p>
                     <p class="text-primary"><b>rangersua@unand.ac.id</b></p><span>atau melalui sosial media:</span>
                     <div class="d-flex pt-2">
-                        <a class="btn btn-square btn-outline-light rounded-circle me-1" href=""><i class="fab fa-twitter"></i></a>
-                        <a class="btn btn-square btn-outline-light rounded-circle me-1" href=""><i class="fab fa-facebook-f"></i></a>
-                        <a class="btn btn-square btn-outline-light rounded-circle me-1" href=""><i class="fab fa-youtube"></i></a>
-                        <a class="btn btn-square btn-outline-light rounded-circle me-0" href=""><i class="fab fa-linkedin-in"></i></a>
+                        <a class="btn btn-square btn-outline-light rounded-circle me-1" target="_blank" href="https://twitter.com/UnandOfficial?"><i class="fab fa-twitter"></i></a>
+                        <a class="btn btn-square btn-outline-light rounded-circle me-1" target="_blank" href="https://id-id.facebook.com/unandofficial/"><i class="fab fa-facebook-f"></i></a>
+                        <a class="btn btn-square btn-outline-light rounded-circle me-1" target="_blank" href="https://www.youtube.com/c/UniversitasAndalas/playlists?"><i class="fab fa-youtube"></i></a>
+                        <a class="btn btn-square btn-outline-light rounded-circle me-0" target="_blank" href="https://www.linkedin.com/school/unand/"><i class="fab fa-linkedin-in"></i></a>
                     </div>
-                </div>
             </div>
         </div>
     </div>
@@ -270,14 +269,14 @@
     <!-- JavaScript Libraries -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="lib/wow/wow.min.js"></script>
-    <script src="lib/easing/easing.min.js"></script>
-    <script src="lib/waypoints/waypoints.min.js"></script>
-    <script src="lib/counterup/counterup.min.js"></script>
-    <script src="lib/owlcarousel/owl.carousel.min.js"></script>
+    <script src="{{ url_for('static', filename='/lib/wow/wow.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='/lib/easing/easing.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='/lib/waypoints/waypoints.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='/lib/counterup/counterup.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='/lib/owlcarousel/owl.carousel.min.js') }}"></script>
 
     <!-- Template Javascript -->
-    <script src="js/main.js"></script>
+    <script src="{{ url_for('static', filename='/js/main.js') }}"></script>
 </body>
 
 </html>
