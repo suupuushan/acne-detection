@@ -1,5 +1,5 @@
 # LIBRARY #
-from flask import Flask, render_template, Response, request, jsonify
+from flask import Flask, render_template, Response, request, jsonify, redirect, url_for
 import tensorflow as tf
 import cv2
 import datetime
@@ -10,7 +10,7 @@ from werkzeug.utils import secure_filename
 from fungsi import make_model
 
 # VARIABLE GLOBAL #
-global capture, switch, filename
+global capture, switch, filename, camera, now, frame
 capture=0
 switch=1
 
@@ -45,13 +45,17 @@ camera = cv2.VideoCapture(0)
 def gen_frames():  
     global capture, filename
     while True:
+        global frame
         success, frame = camera.read() 
         if success: 
-            if(capture):
-                capture=0
-                filename = os.path.sep.join(['uploads', "upload.jpg"])
-                cv2.imwrite(filename, frame)   
-                print('captured')  
+            # if(capture):
+            #     capture=0
+            #     # filename = os.path.sep.join(['uploads', "upload.jpg"])
+            #     global now
+            #     now = datetime.datetime.now()
+            #     filename = os.path.sep.join(['uploads', "upload_{}.jpg".format(str(now).replace(":",''))])
+            #     cv2.imwrite(filename, frame)   
+            #     print('captured')
             try:
                 ret, buffer = cv2.imencode('.jpg', cv2.flip(frame,1))
                 frame = buffer.tobytes()
@@ -63,33 +67,6 @@ def gen_frames():
         else:
             pass
 
-# # prediksi penyakit kulit
-# def predict():
-#     if filename != '':
-#         file_ext = os.path.splitext(filename)[1]
-#         gambar_prediksi = 'uploads/' + filename
-
-#         # open gambar prediksi
-#         test_image = Image.open('.' + gambar_prediksi)
-		
-#         # ubah ukuran gambar
-#         test_image_resized = test_image.resize((32, 32))
-		
-#         # konversi gambar ke array
-#         image_array = np.array(test_image_resized)
-#         test_image_x = (image_array / 255) - 0.5
-#         test_image_x = np.array([image_array])
-
-#         # prediksi gambar
-#         y_pred_test_single = model.predict_proba(test_image_x)
-#         y_pred_test_classes_single = np.argmax(y_pred_test_single, axis=1)
-		
-#         hasil_prediksi = name_classes[y_pred_test_classes_single[0]]
-
-#     return 'Hai'
-
-
-  
 # ROUTING #
 @app.route('/')
 def beranda():
@@ -99,6 +76,7 @@ def beranda():
 def aplikasi():
     # if os.path.exists("uploads/upload.jpg"):
     #     os.remove("uploads/upload.jpg")
+    print('open')
     return render_template('aplikasi.html')
 
 @app.route('/tim')
@@ -112,11 +90,21 @@ def video_feed():
 @app.route('/requests',methods=['POST','GET'])
 def tasks():
     global switch,camera
+    print('tasks')
     if request.method == 'POST':
         global capture
         capture = (request.form['capture'])
+
+        success, frame = camera.read()
+        if success:
+            global now
+            now = datetime.datetime.now()
+            filename = os.path.sep.join(['uploads', "upload_{}.jpg".format(str(now).replace(":",''))])
+            cv2.imwrite(filename, frame)   
+            print('captured')    
         
-        gambar_prediksi = "uploads/" + "upload.jpg"
+        filename = "upload_{}.jpg".format(str(now).replace(":",''))
+        gambar_prediksi = "uploads/" + filename
 
         # open gambar prediksi
         test_image = Image.open(gambar_prediksi)
@@ -137,103 +125,11 @@ def tasks():
         print('predicted')
         # Return hasil prediksi dengan format JSON
         return jsonify({
-            "prediksi": hasil_prediksi
+            "prediksi": filename
         })
-        # if request.form.get('click') == 'Ambil & Prediksi Foto':
-        #     global capture
-        #     capture=1
-        # elif  request.form.get('stop') == 'Stop/Start Kamera':
-        #     if(switch==1):
-        #         switch=0
-        #         camera.release()
-        #         cv2.destroyAllWindows()
-        #     else:
-        #         camera = cv2.VideoCapture(0)
-        #         switch=1
-
     elif request.method=='GET':
         return render_template('aplikasi.html')
     # return render_template('aplikasi.html')
-
-# def predict():
-#     gambar_prediksi = 'uploads/' + "upload.jpg"
-
-#     # open gambar prediksi
-#     test_image = Image.open(gambar_prediksi)
-    
-#     # ubah ukuran gambar
-#     test_image_resized = test_image.resize((400, 400))
-    
-#     # konversi gambar ke array
-#     image_array = np.array(test_image_resized)
-#     test_image_x = (image_array / 255) - 0.5
-#     test_image_x = np.array([image_array])
-
-#     # prediksi gambar
-#     y_pred_test_single = model.predict(test_image_x)
-#     y_pred_test_classes_single = np.argmax(y_pred_test_single, axis=1)
-    
-#     hasil_prediksi = cifar10_classes[y_pred_test_classes_single[0]]
-
-#     # Return hasil prediksi dengan format JSON
-#     return jsonify({
-#         "prediksi": hasil_prediksi
-#     })
-    # return 'Hai'
-
-# @app.route("/api/deteksi",methods=['POST'])
-# def apiDeteksi():
-# 	# Set nilai default untuk hasil prediksi dan gambar yang diprediksi
-# 	hasil_prediksi  = '(none)'
-# 	gambar_prediksi = '(none)'
-
-# 	# Get File Gambar yg telah diupload pengguna
-# 	uploaded_file = request.files['file']
-# 	filename      = secure_filename(uploaded_file.filename)
-	
-# 	# Periksa apakah ada file yg dipilih untuk diupload
-# 	if filename != '':
-	
-# 		# Set/mendapatkan extension dan path dari file yg diupload
-# 		file_ext        = os.path.splitext(filename)[1]
-# 		gambar_prediksi = '/uploads/' + filename
-		
-# 		# Periksa apakah extension file yg diupload sesuai (jpg)
-# 		if file_ext in app.config['UPLOAD_EXTENSIONS']:
-			
-# 			# # Simpan Gambar
-# 			# uploaded_file.save(os.path.join(app.config['UPLOAD_PATH'], filename))
-			
-# 			# Memuat Gambar
-# 			test_image         = Image.open('.' + gambar_prediksi)
-			
-# 			# Mengubah Ukuran Gambar
-# 			test_image_resized = test_image.resize((32, 32))
-			
-# 			# Konversi Gambar ke Array
-# 			image_array        = np.array(test_image_resized)
-# 			test_image_x       = (image_array / 255) - 0.5
-# 			test_image_x       = np.array([image_array])
-			
-# 			# Prediksi Gambar
-# 			y_pred_test_single         = model.predict_proba(test_image_x)
-# 			y_pred_test_classes_single = np.argmax(y_pred_test_single, axis=1)
-			
-# 			hasil_prediksi = cifar10_classes[y_pred_test_classes_single[0]]
-			
-# 			# Return hasil prediksi dengan format JSON
-# 			return jsonify({
-# 				"prediksi": hasil_prediksi,
-# 				"gambar_prediksi" : gambar_prediksi
-# 			})
-# 		else:
-# 			# Return hasil prediksi dengan format JSON
-# 			gambar_prediksi = '(none)'
-# 			return jsonify({
-# 				"prediksi": hasil_prediksi,
-# 				"gambar_prediksi" : gambar_prediksi
-# 			})
-
 
 if __name__ == '__main__':
     
