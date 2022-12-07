@@ -14,8 +14,9 @@ $(document).ready(function(){
 				success     : function(res){
 					// Ambil hasil prediksi dan path gambar yang diprediksi dari API
 					res_data_prediksi   = res['prediksi']
+					res_gambar_prediksi = res['gambar_prediksi']
 					// Tampilkan hasil prediksi ke halaman web
-					generate_prediksi(res_data_prediksi); 
+					generate_prediksi(res_data_prediksi, res_gambar_prediksi); 
 			  	}
 			});
 		}
@@ -28,10 +29,11 @@ $(document).ready(function(){
   })
    
   // Fungsi untuk menampilkan hasil prediksi model
-  function generate_prediksi(data_prediksi) {
+  function generate_prediksi(data_prediksi, image_prediksi) {
 	var str="";
 	str += "<h3>Hasil Prediksi </h3>";
 	str += "<br>";
+	str += "<img src='" + image_prediksi + "' width=\"200\"></img>"
 	str += "<h3>" + data_prediksi + "</h3>";
 	$("#hasil_prediksi").html(str);
   }  

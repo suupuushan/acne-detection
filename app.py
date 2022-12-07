@@ -6,7 +6,6 @@ import datetime
 import os
 import numpy as np
 from PIL import Image
-from werkzeug.utils import secure_filename
 from fungsi import make_model
 
 # VARIABLE GLOBAL #
@@ -17,25 +16,19 @@ switch=1
 # INISIASI FLASK APP #  
 app = Flask(__name__, static_url_path='/static')
 
-app.config['UPLOAD_EXTENSIONS']  = ['.jpg','.JPG']
 
 model = None
 
-NUM_CLASSES = 10
-cifar10_classes = ["airplane", "automobile", "bird", "cat", "deer", 
-                   "dog", "frog", "horse", "ship", "truck"]
+# NUM_CLASSES = 10
+# cifar10_classes = ["airplane", "automobile", "bird", "cat", "deer", 
+#                    "dog", "frog", "horse", "ship", "truck"]
 
 # model = None
 
-# NUM_CLASSES = 3
-# name_classes = ["Eczema", "Basal Cell Carcinoma", "Melanocytic Nevi"]
+NUM_CLASSES = 3
+name_classes = ["Basal Cell Carcinoma", "Eczema", "Melanocytic Nevi"]
 
 
-# DIRECTORY PENYIMPANAN GAMBAR WEBCAM #
-try:
-    os.mkdir("./uploads")
-except OSError as error:
-    pass
 
 # FLASK CAMERA #
 camera = cv2.VideoCapture(0)
@@ -99,33 +92,36 @@ def tasks():
         if success:
             global now
             now = datetime.datetime.now()
-            filename = os.path.sep.join(['uploads', "upload_{}.jpg".format(str(now).replace(":",''))])
-            cv2.imwrite(filename, frame)   
+            filename = os.path.sep.join(['static/img/uploads', "upload_{}.jpg".format(str(now).replace(":",''))])
+            cv2.imwrite(filename, cv2.flip(frame,1))   
             print('captured')    
         
         filename = "upload_{}.jpg".format(str(now).replace(":",''))
-        gambar_prediksi = "uploads/" + filename
+        gambar_prediksi = "static/img/uploads/" + filename
 
         # open gambar prediksi
         test_image = Image.open(gambar_prediksi)
         
         # ubah ukuran gambar
-        test_image_resized = test_image.resize((32, 32))
+        test_image_resized = test_image.resize((400, 400))
         
         # konversi gambar ke array
-        image_array = np.array(test_image_resized)
-        test_image_x = (image_array / 255) - 0.5
-        test_image_x = np.array([image_array])
+        image_array = tf.keras.preprocessing.image.array_to_img(test_image_resized)
+        # image_array = np.array(test_image_resized)
+        # test_image_x = (image_array / 255) - 0.5
+        # test_image_x = np.array([image_array])
+        test_image_x = tf.expand_dims(image_array, 0)
 
         # prediksi gambar
         y_pred_test_single = model.predict(test_image_x)
         y_pred_test_classes_single = np.argmax(y_pred_test_single, axis=1)
         
-        hasil_prediksi = cifar10_classes[y_pred_test_classes_single[0]]
+        hasil_prediksi = name_classes[y_pred_test_classes_single[0]]
         print('predicted')
         # Return hasil prediksi dengan format JSON
         return jsonify({
-            "prediksi": filename
+            "prediksi": hasil_prediksi,
+			"gambar_prediksi" : gambar_prediksi
         })
     elif request.method=='GET':
         return render_template('aplikasi.html')
@@ -134,7 +130,7 @@ def tasks():
 if __name__ == '__main__':
     
     model = make_model()
-    model.load_weights("model_cifar10_cnn_tf.h5")
+    model.load_weights("skin-saviour.h5")
     app.run(host="localhost", port=5000, debug=True)
     
 camera.release()
