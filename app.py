@@ -25,6 +25,7 @@ NUM_CLASSES = 10
 cifar10_classes = ["airplane", "automobile", "bird", "cat", "deer", 
                    "dog", "frog", "horse", "ship", "truck"]
 
+# model = None
 
 # NUM_CLASSES = 3
 # name_classes = ["Eczema", "Basal Cell Carcinoma", "Melanocytic Nevi"]
