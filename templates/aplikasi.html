@@ -141,16 +141,16 @@
         
             <div class="row">
                 <div class="col-lg-12 text-center">
-                    <img src="{{ url_for('video_feed') }}" height="80%">
+                    <img src="{{ url_for('video_feed') }}" height="60%">
                     <form method="post" action="{{ url_for('tasks') }}">
                         <br>
                         <input id="prediksi" type="submit" class="btn btn-primary mb-2" value="Ambil Foto & Prediksi" name="click"/>
                     </form>
                     <br>
                         <!-- Bagian Halaman untuk Hasil Prediksi -->
-                        <div id="hasil_prediksi" align="center">
+                        <div id="hasil_prediksi">
                         <!-- Hasil Prediksi akan ditampilkan di sini-->
-                    </div>
+                        </div>
                 </div>
             </div>
         </div>
@@ -210,9 +210,7 @@
 
     <!-- Template Javascript -->
     <script src="{{ url_for('static', filename='/js/main.js') }}"></script>
-    <script src="{{ url_for('static', filename='/js/webcam.js') }}"></script>
     <script src="{{ url_for('static', filename='/js/client_side.js') }}"></script>
-    <script type="text/javascript" src="{{ url_for('static', filename='/js/webcam.min.js') }}"></script>
 	
 </body>
 

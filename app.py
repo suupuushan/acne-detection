@@ -17,19 +17,10 @@ switch=1
 # INISIASI FLASK APP #  
 app = Flask(__name__, static_url_path='/static')
 
-
 model = None
-
-# NUM_CLASSES = 10
-# cifar10_classes = ["airplane", "automobile", "bird", "cat", "deer", 
-#                    "dog", "frog", "horse", "ship", "truck"]
-
-# model = None
 
 NUM_CLASSES = 3
 name_classes = ["Basal Cell Carcinoma", "Eczema", "Melanocytic Nevi"]
-
-
 
 # FLASK CAMERA #
 camera = cv2.VideoCapture(0)
@@ -42,14 +33,6 @@ def gen_frames():
         global frame
         success, frame = camera.read() 
         if success: 
-            # if(capture):
-            #     capture=0
-            #     # filename = os.path.sep.join(['uploads', "upload.jpg"])
-            #     global now
-            #     now = datetime.datetime.now()
-            #     filename = os.path.sep.join(['uploads', "upload_{}.jpg".format(str(now).replace(":",''))])
-            #     cv2.imwrite(filename, frame)   
-            #     print('captured')
             try:
                 ret, buffer = cv2.imencode('.jpg', cv2.flip(frame,1))
                 frame = buffer.tobytes()
@@ -68,8 +51,6 @@ def beranda():
     
 @app.route('/aplikasi')
 def aplikasi():
-    # if os.path.exists("uploads/upload.jpg"):
-    #     os.remove("uploads/upload.jpg")
     print('open')
     return render_template('aplikasi.html')
 
@@ -116,16 +97,6 @@ def tasks():
         y_pred_test_single         = model.predict(test_image_x)
         y_pred_test_classes_single = np.argmax(y_pred_test_single, axis=1)
         print(y_pred_test_classes_single)
-
-        # image_array = tf.keras.preprocessing.image.array_to_img(test_image_resized)
-        # # image_array = np.array(test_image_resized)
-        # # test_image_x = (image_array / 255) - 0.5
-        # # test_image_x = np.array([image_array])
-        # test_image_x = tf.expand_dims(image_array, 0)
-
-        # # prediksi gambar
-        # y_pred_test_single = model.predict(test_image_x)
-        # y_pred_test_classes_single = np.argmax(y_pred_test_single, axis=1)
         
         hasil_prediksi = name_classes[y_pred_test_classes_single[0]]
         print('predicted')
@@ -136,7 +107,6 @@ def tasks():
         })
     elif request.method=='GET':
         return render_template('aplikasi.html')
-    # return render_template('aplikasi.html')
 
 if __name__ == '__main__':
     
