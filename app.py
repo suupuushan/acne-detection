@@ -6,6 +6,7 @@ import datetime
 import os
 import numpy as np
 from PIL import Image
+from tensorflow.keras.models import load_model
 from fungsi import make_model
 
 # VARIABLE GLOBAL #
@@ -103,18 +104,28 @@ def tasks():
         test_image = Image.open(gambar_prediksi)
         
         # ubah ukuran gambar
-        test_image_resized = test_image.resize((400, 400))
+        test_image_resized = test_image.resize((320, 320))
         
         # konversi gambar ke array
-        image_array = tf.keras.preprocessing.image.array_to_img(test_image_resized)
-        # image_array = np.array(test_image_resized)
-        # test_image_x = (image_array / 255) - 0.5
-        # test_image_x = np.array([image_array])
-        test_image_x = tf.expand_dims(image_array, 0)
 
-        # prediksi gambar
-        y_pred_test_single = model.predict(test_image_x)
+        image_array        = np.array(test_image_resized)
+        test_image_x       = (image_array / 255) - 0.5
+        test_image_x       = np.array([image_array])
+		
+		# Prediksi Gambar
+        y_pred_test_single         = model.predict(test_image_x)
         y_pred_test_classes_single = np.argmax(y_pred_test_single, axis=1)
+        print(y_pred_test_classes_single)
+
+        # image_array = tf.keras.preprocessing.image.array_to_img(test_image_resized)
+        # # image_array = np.array(test_image_resized)
+        # # test_image_x = (image_array / 255) - 0.5
+        # # test_image_x = np.array([image_array])
+        # test_image_x = tf.expand_dims(image_array, 0)
+
+        # # prediksi gambar
+        # y_pred_test_single = model.predict(test_image_x)
+        # y_pred_test_classes_single = np.argmax(y_pred_test_single, axis=1)
         
         hasil_prediksi = name_classes[y_pred_test_classes_single[0]]
         print('predicted')
@@ -129,8 +140,7 @@ def tasks():
 
 if __name__ == '__main__':
     
-    model = make_model()
-    model.load_weights("skin-saviour.h5")
+    model = load_model("skin-saviour3.h5")
     app.run(host="localhost", port=5000, debug=True)
     
 camera.release()
